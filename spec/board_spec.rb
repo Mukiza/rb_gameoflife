@@ -55,5 +55,18 @@ describe "Empty Board" do
             board = Board.new([Cell.new(0, 1), cell, Cell.new(2,0), Cell.new(2,2)])
             expect(board.spawn.live_cells).to include(cell)
         end
+
+        it 'should revive a cell threee neighbours' do
+            next_generation = next_generation_for([[0, 0], [2, 0], [1, 1], [1, 0]])
+            expect(next_generation.live_cells).to include(Cell.new(1, 0))
+        end
+
+        def next_generation_for(seed)
+            cells = []
+            seed.each do |x, y|
+                cells << Cell.new(x, y)
+            end
+            Board.new(cells)
+        end
     end
 end
