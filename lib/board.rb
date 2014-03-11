@@ -20,7 +20,7 @@ class Board
     def spawn
         survivors = []
         @cells.each do |cell|
-            survivors << cell unless neighbours_to(cell) < 2
+            survivors << cell if [2, 3].include?(neighbours_to(cell))
         end
         Board.new(survivors)
     end
