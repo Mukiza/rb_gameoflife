@@ -22,13 +22,13 @@ class Board
     end
 
     def should_survive?(cell)
-        [2, 3].include?(neighbours_to(cell)) and is_alive?(cell) 
+        [2,3].include?(neighbours_to(cell)) and is_alive?(cell)
     end
 
     def should_live?(cell)
         should_survive?(cell) or should_be_revived?(cell)
     end
-    
+
     def should_be_revived?(cell)
         neighbours_to(cell) == 3 and  not is_alive?(cell)
     end
@@ -43,4 +43,5 @@ class Board
         end
         Board.new(survivors)
     end
+
 end
