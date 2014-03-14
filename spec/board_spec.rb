@@ -61,9 +61,14 @@ describe "Empty Board" do
             expect(next_generation).to include(Cell.new(1, 0))
         end
 
-        it 'should handle start fromation'do
+        it 'should handle start formation'do
             next_generation = next_generation_for([[0,0], [2,0], [1,1], [0, 2], [2,2]])
             expect(next_generation).to eq([Cell.new(1, 0), Cell.new(0, 1), Cell.new(2, 1), Cell.new(1, 2)])
+        end
+
+        it 'should handle the blinker formation'do
+            next_generation = next_generation_for([[1,0], [1,1], [1,2]])
+            expect(next_generation).to include(Cell.new(0, 1), Cell.new(1, 1), Cell.new(2, 1))
         end
 
         def next_generation_for(seed)
