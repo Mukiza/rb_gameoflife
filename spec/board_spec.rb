@@ -24,7 +24,7 @@ describe "Empty Board" do
     end
     it "should keep a cell with two neighbours" do
         board = Board.new([cell, Cell.new(2,0), Cell.new(2,2)])
-        expect(board.spawn.live_cells).to eq([cell])
+        expect(board.spawn.live_cells).to include(cell)
     end
 
     describe "Board counting neigbours" do
@@ -57,8 +57,13 @@ describe "Empty Board" do
         end
 
         it 'should revive a cell threee neighbours' do
-            next_generation = next_generation_for([[0, 0], [2, 0], [1, 1], [1, 0]])
-            expect(next_generation.live_cells).to include(Cell.new(1, 0))
+            next_generation = next_generation_for([[0, 0], [2, 0], [1, 1]])
+            expect(next_generation).to include(Cell.new(1, 0))
+        end
+
+        it 'should handle start fromation'do
+            next_generation = next_generation_for([[0,0], [2,0], [1,1], [0, 2], [2,2]])
+            expect(next_generation).to eq([Cell.new(1, 0), Cell.new(0, 1), Cell.new(2, 1), Cell.new(1, 2)])
         end
 
         def next_generation_for(seed)
@@ -66,7 +71,8 @@ describe "Empty Board" do
             seed.each do |x, y|
                 cells << Cell.new(x, y)
             end
-            Board.new(cells)
+            board = Board.new(cells)
+            board.spawn.live_cells
         end
     end
 end
