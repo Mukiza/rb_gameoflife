@@ -13,10 +13,14 @@ class Board
 
     def neighbours_to(cell)
         @cells.select do|a_cell|
-            cell_x_cordinate = (a_cell.x - cell.x).abs
-            cell_y_cordinate = (a_cell.y - cell.y).abs 
-            cell_x_cordinate <= 1 and  cell_y_cordinate <= 1 and not (cell_x_cordinate == 0 and cell_y_cordinate == 0)
+            cell_row = (a_cell.row - cell.row).abs
+            cell_col = (a_cell.col - cell.col).abs 
+            cell_row <= 1 and  cell_col <= 1 and not cell_positions_eql?(cell_row, cell_col)        
         end.length
+    end
+
+    def cell_positions_eql?(cell_row, cell_col)
+        cell_row == 0 and cell_col == 0
     end
 
     def is_alive?(cell)
