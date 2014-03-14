@@ -13,14 +13,8 @@ class Board
 
     def neighbours_to(cell)
         @cells.select do|a_cell|
-            cell_row = (a_cell.row - cell.row).abs
-            cell_col = (a_cell.col - cell.col).abs 
-            cell_row <= 1 and  cell_col <= 1 and not cell_positions_eql?(cell_row, cell_col)        
+            cell.is_neigbour_to?(a_cell)
         end.length
-    end
-
-    def cell_positions_eql?(cell_row, cell_col)
-        cell_row == 0 and cell_col == 0
     end
 
     def is_alive?(cell)
